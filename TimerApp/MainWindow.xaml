@@ -1,0 +1,99 @@
+﻿<Window x:Class="TimerApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Title="Таймер и Будильник" Height="350" Width="500">
+    <Grid>
+        <TabControl>
+            <!-- Вкладка с таймером -->
+            <TabItem Header="Таймер">
+                <StackPanel>
+                    <!-- Часы -->
+                    <Grid Margin="5">
+                        <TextBox Name="HoursInput" Width="50" VerticalAlignment="Center"/>
+                        <TextBlock Text="Часы" Foreground="Gray" 
+                                   Margin="5,0,0,0"
+                                   IsHitTestVisible="False"
+                                   VerticalAlignment="Center">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=HoursInput}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Text, ElementName=HoursInput}" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+
+                    <!-- Минуты -->
+                    <Grid Margin="5">
+                        <TextBox Name="MinutesInput" Width="50" VerticalAlignment="Center"/>
+                        <TextBlock Text="Минуты" Foreground="Gray" 
+                                   Margin="5,0,0,0"
+                                   IsHitTestVisible="False"
+                                   VerticalAlignment="Center">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=MinutesInput}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                        <Trigger Property="Text" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+
+                    <!-- Секунды -->
+                    <Grid Margin="5">
+                        <TextBox Name="SecondsInput" Width="50" VerticalAlignment="Center"/>
+                        <TextBlock Text="Секунды" Foreground="Gray" 
+                                   Margin="5,0,0,0"
+                                   IsHitTestVisible="False"
+                                   VerticalAlignment="Center">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=SecondsInput}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                        <Trigger Property="Text" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+
+                    <!-- Кнопки управления таймером -->
+                    <Button Name="StartTimerButton" Content="Старт" Click="StartTimer_Click" Width="100" Margin="5"/>
+                    <Button Name="StopTimerButton" Content="Стоп" Click="StopTimer_Click" Width="100" Margin="5"/>
+                    <Button Name="ResetTimerButton" Content="Сброс" Click="ResetTimer_Click" Width="100" Margin="5"/>
+                    <TextBlock Name="TimerDisplay" FontSize="20" Margin="10"/>
+                </StackPanel>
+            </TabItem>
+
+            <!-- Вкладка с будильником -->
+            <TabItem Header="Будильник">
+                <StackPanel>
+                    <DatePicker Name="AlarmDatePicker" Margin="5"/>
+                    <TextBox Name="AlarmTimeInput" Width="100" Margin="5" Text="Часы:Минуты"/>
+                    <Button Name="SetAlarmButton" Content="Установить будильник" Click="SetAlarm_Click" Width="150" Margin="5"/>
+                    <ListBox Name="AlarmList" Width="300" Height="100" Margin="5"/>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
